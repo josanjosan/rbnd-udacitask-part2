@@ -1,5 +1,5 @@
 class TodoItem
-  # include Listable
+  include Listable
   attr_reader :description, :due, :priority
 
   def initialize(description, options={})
@@ -7,9 +7,7 @@ class TodoItem
     @due = options[:due] ? Date.parse(options[:due]) : options[:due]
     @priority = options[:priority]
   end
-  def format_description
-    "#{@description}".ljust(25)
-  end
+  
   def format_date
     @due ? @due.strftime("%D") : "No due date"
   end
@@ -21,7 +19,7 @@ class TodoItem
     return value
   end
   def details
-    format_description + "due: " +
+    format_description(@description) + "due: " +
     format_date +
     format_priority
   end
