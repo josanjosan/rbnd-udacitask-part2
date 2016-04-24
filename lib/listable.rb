@@ -19,4 +19,11 @@ module Listable
     return value
   end
 
+  def format_to_table(item)
+    fmt = "event dates: " + format_date(item.start_date, item.end_date) if item.type == "event"
+    fmt = "site name: " + item.format_name if item.type == "link"
+    fmt = "due: " + format_date(item.due) + item.format_priority(item.priority).to_s if item.type == "todo"
+    return fmt
+  end
+
 end

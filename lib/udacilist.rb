@@ -1,4 +1,5 @@
 class UdaciList
+  include Listable
   attr_reader :title, :items
   @@types = []
   @@types.push('todo')
@@ -13,6 +14,7 @@ class UdaciList
     options[:title] ? @title  = options[:title] : @title = "Untitled List"
     @items = []
   end
+  
   def add(type, description, options={})
     type = type.downcase
     puts "InvalidItemType: type #{type} is not suported in UdaciList" if !@@types.include?(type)
@@ -21,11 +23,13 @@ class UdaciList
     @items.push EventItem.new(type, description, options) if type == "event"
     @items.push LinkItem.new(type, description, options) if type == "link"
   end
+  
   def delete(index)
     puts "IndexExceedsListSize: list has less than #{index} items" if index > @items.count
     #raise UdaciListErrors::IndexExceedsListSize, "list has less than #{index} items" if index > @items.count
     @items.delete_at(index - 1)
   end
+
   def all
     puts "-" * @title.length
     puts @title
@@ -33,6 +37,15 @@ class UdaciList
     @items.each_with_index do |item, position|
       puts "#{position + 1}) #{item.details}"
     end
+  end
+
+  def all_table
+    rows = []
+    @items.each_with_index do |item, position|
+      rows.push([position + 1, "#{item.type}: #{item.description}", format_to_table(item)])
+    end
+    table = Terminal::Table.new :title => self.title,:rows => rows
+    puts table
   end
 
   def filter(type)
