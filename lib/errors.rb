@@ -12,4 +12,7 @@ module UdaciListErrors
   class NoTypeItem < StandardError
   end
 
+  class NoDateItem < StandardError
+  end
+
 end

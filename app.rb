@@ -44,4 +44,8 @@ new_list.all
 
 # DEMO FILTER BY ITEM TYPE
 # ------------------------
-list.all_table
+list.filter("event").all_table
+list.soonest("event")
+list.soonest("todo")
+list.soonest("link")
+list.soonest("image")
