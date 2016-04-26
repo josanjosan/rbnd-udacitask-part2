@@ -15,4 +15,7 @@ module UdaciListErrors
   class NoDateItem < StandardError
   end
 
+  class WrongArgumentType < StandardError
+  end
+
 end

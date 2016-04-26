@@ -70,6 +70,17 @@ class UdaciList
     puts "Soonest #{type} is \"#{soonest_item[0].description}\" -> #{soonest_date.strftime("%D")}"  if dates != nil
   end
 
+  def delete_multiple(*indices)
+    index_check = false
+    indices.each { |index| index_check = !index.is_a?(Integer) } 
+    puts "WrongArgumentType: one or more of the arguments is not an integer" if index_check
+    #raise UdaciListErrors::WrongArgumentType, "one or more of the arguments is not an integer"
+    indices_fix = indices.delete_if { |index| index > @items.count}
+    indices.uniq!
+    indices_fix.sort! { |x,y| y <=> x}
+    indices_fix.each { |index| self.delete(index) }
+  end
+
   private
 
   def add_type(type)

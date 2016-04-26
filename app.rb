@@ -44,8 +44,12 @@ new_list.all
 
 # DEMO FILTER BY ITEM TYPE
 # ------------------------
-list.filter("event").all_table
-list.soonest("event")
-list.soonest("todo")
-list.soonest("link")
-list.soonest("image")
+list.filter("event").all_table # Prints a list in formatted table with only "event" items
+list.soonest("event") # Prints the event with closest date
+list.soonest("todo") # Prints the task with closest due date
+list.soonest("link") # Throws NoDateItem error
+list.soonest("image") # Throws InvalidItemType error
+list.all_table # Just for before/after comparison
+list.delete_multiple(2,4,2,37) # Only deletes items 2 and four, omits duplicated index 2 and nonexistent item 37 without throwing error or deleting extra items
+list.all_table # Just for before/after comparison
+list.delete_multiple(2,4,2,37,"a") # Throws WrongArgumentType error
