@@ -64,10 +64,14 @@ class UdaciList
     dates = nil
     dates = self.filter(type).items.map { |item| item.start_date } if type == "event"
     dates = self.filter(type).items.map { |item| item.due } if type == "todo"
+    dates.delete_if { |date| date.to_date < Date.today}  if dates != nil
     soonest_date = dates.min if dates != nil
+    soonest_item = []
     soonest_item = self.filter(type).items.select { |item| item.start_date == soonest_date and type == "event" } if type == "event"
     soonest_item = self.filter(type).items.select { |item| item.due == soonest_date and type == "todo" } if type == "todo"
-    puts "Soonest #{type} is \"#{soonest_item[0].description}\" -> #{soonest_date.strftime("%D")}"  if dates != nil
+    puts "--------"
+    puts "Soonest #{type} is \"#{soonest_item[0].description}\" -> #{soonest_date.strftime("%D")}" if soonest_item.any?
+    puts "No #{type} soon"  if !soonest_item.any? and @@types.include?(type) and type != "link"
   end
 
   def delete_multiple(*indices)
