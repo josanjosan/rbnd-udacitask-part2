@@ -1,13 +1,18 @@
 # What you added to Udacitask 2.0
 # -------------------------------------------------------
 1. What is the gem of your choice and how did you use it?
+I choosed terminal-table becaused it seemed like nice way to format the list output. Also, while its usage was not that complex, it was slightly different from the simple examples in the class, so it represented some challenge in learning how to use by getting into documentation. I used to print the list in a talbe with title header.
 2. Describe the 2 features you added to the project.
-  a) Feature 1...
-  b) Feature 2...
+  a) Soonest: lists can get long and messy, so I figured that if the user wants to know what's the most urgent task to do or event to attend, a simple method to find it would help. I like its simplicity, instead of sorting the list and showing every item, it brings only the closest todo or event item in the future. Takes item type as input and brings soonest item of that type. Throws error when input is not an item type supported by Udacilists. Thros specific erro when input is link which doesn't support dates.
+  b) Delete multiple items: if the user wanted to delete more than one item the delete method did the job, but represented an unnecessary repetetive action. Added delete_multiple method which gets a variable number of arguments, indexes. Due to its flexible imput, its constructure so it can get duplicated indexes or indexes that are greater than the actual number of items in the list without giving unexpected results, like throwin error beacause index doesn't exist or deleteting somthing other than what the user really wants deleted. Throws error when at least one of the arguments is not a integer.
 
 # REFLECTIONS
 # -------------------------------------------------------
 1. How long did you spend working on this project?
+Six days, with working session of 2 to 3 hours (not really continuous due to daily schedule). Basic requirements where not that hard this time, and I'm getting faster in how to get an indea to code and overcome problems, but then I got stuck at the additional features, which generally have many edge case one does not often see in the first design, so there are many iterations until the feature works as expected.
 2. What was the most rewarding challenge you conquered?
+Feeling more fluent and fast when materializing an idea in actual code.
 3. What two additional features did you build? Why?
+They are explained above. I choosed or functionality and simplicity.
 4. Where do you still have room to grow?
+Having more eficient working sessions.
