@@ -24,8 +24,7 @@ class UdaciList
   end
   
   def delete(index)
-    puts "IndexExceedsListSize: \"#{self.title}\" has less than #{index} items" if index > @items.count
-    #raise UdaciListErrors::IndexExceedsListSize, "\"#{self.title}\" has less than #{index} items" if index > @items.count
+    raise UdaciListErrors::IndexExceedsListSize, "\"#{self.title}\" has less than #{index} items" if index > @items.count
     @items.delete_at(index - 1)
   end
 
@@ -50,8 +49,7 @@ class UdaciList
   def filter(type)
     checks_valid_item(type)
     filtered_items = @items.select {|item| item.type == type}
-    puts "NoTypeItem: there are currently no items of type \"#{type}\" in \"#{self.title}\"" if filtered_items.count == 0 and @@types.include?(type)
-    #raise UdaciListErrors::NoTypeItem, "there are currently no items of type \"#{type}\" in \"#{self.title}\"" if filtered_type.count == 0
+    raise UdaciListErrors::NoTypeItem, "there are currently no items of type \"#{type}\" in \"#{self.title}\"" if filtered_items.count == 0
     filtered_list = UdaciList.new(title: self.title)
     filtered_items.each {|item| filtered_list.items.push(item)}
     return filtered_list
@@ -59,8 +57,7 @@ class UdaciList
 
   def soonest(type)
     checks_valid_item(type)
-    puts "NoDateItem: type #{type} does not support dates" if type == "link"
-    #raise UdaciListErrors::NoDateItem, "type #{type} does not support dates" if type == "link"
+    raise UdaciListErrors::NoDateItem, "type #{type} does not support dates" if type == "link"
     dates = nil
     dates = self.filter(type).items.map { |item| item.start_date } if type == "event"
     dates = self.filter(type).items.map { |item| item.due } if type == "todo"
@@ -77,8 +74,7 @@ class UdaciList
   def delete_multiple(*indices)
     index_check = false
     indices.each { |index| index_check = !index.is_a?(Integer) } 
-    puts "WrongArgumentType: one or more of the arguments is not an integer" if index_check
-    #raise UdaciListErrors::WrongArgumentType, "one or more of the arguments is not an integer"
+    raise UdaciListErrors::WrongArgumentType, "one or more of the arguments is not an integer" if index_check
     indices_fix = indices.delete_if { |index| index > @items.count}
     indices.uniq!
     indices_fix.sort! { |x,y| y <=> x}
@@ -92,8 +88,7 @@ class UdaciList
   end
 
   def checks_valid_item(type)
-    puts "InvalidItemType: type #{type} is not suported in UdaciList" if !@@types.include?(type)
-    #raise UdaciListErrors::InvalidItemType, "type #{type} is not suported in UdaciList" if !@@types.include?(type)
+    raise UdaciListErrors::InvalidItemType, "type #{type} is not suported in UdaciList" if !@@types.include?(type)
   end
 
 end

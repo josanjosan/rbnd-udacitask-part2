@@ -7,8 +7,7 @@ class TodoItem
     @type = type
     @description = description
     @due = options[:due] ? Chronic.parse(options[:due]) : options[:due]
-    puts "InvalidPriorityValue: \"#{options[:priority]}\" is not a valid priority level" if !@@priority_levels.include?(options[:priority])
-    #raise UdaciListErrors::InvalidPriorityValue "\"#{options[:priority]}\" is not a valid priority level" if !@@priority_levels.include?(options[:priority])
+    raise UdaciListErrors::InvalidPriorityValue, "\"#{options[:priority]}\" is not a valid priority level" if !@@priority_levels.include?(options[:priority])
     @priority = options[:priority]
   end
   
